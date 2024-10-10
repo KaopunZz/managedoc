@@ -680,11 +680,13 @@
         let currentDraft = {};
         let deleteMode = false;
         let currentEditIndex = -1;
+        const API_URL = 'https://dinopj-6f78ft9ou-kaopunzzs-projects.vercel.app/';
+
 
         // Fetch all documents
         async function fetchDocuments() {
             try {
-                const response = await fetch('http://localhost:3001/api/documents');
+                const response = await fetch('${API_URL}/api/documents');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -704,7 +706,7 @@
 
             if (topic && writer && content) {
                 try {
-                    const response = await fetch('http://localhost:3001/api/documents', {
+                    const response = await fetch('${API_URL}/api/documents', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -738,7 +740,7 @@
 
             if (editedDoc.topic && editedDoc.writer && editedDoc.content) {
                 try {
-                    const response = await fetch(`http://localhost:3001/api/documents/${documents[currentEditIndex].id}`, {
+                    const response = await fetch(`${API_URL}/api/documents/${documents[currentEditIndex].id}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
@@ -768,7 +770,7 @@
             if (selectedDocs.length > 0) {
                 try {
                     for (const doc of selectedDocs) {
-                        const response = await fetch(`http://localhost:3001/api/documents/${doc.id}`, {
+                        const response = await fetch(`${API_URL}/api/documents/${doc.id}`, {
                             method: 'DELETE',
                         });
                         if (!response.ok) {
